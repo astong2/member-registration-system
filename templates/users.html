@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Registered Users</title>
+</head>
+<body>
+    <h1>All registered Users</h1>
+
+    <ul>
+        {% for user in users %}
+            <li>
+                <strong>{{ user.username }}</strong> : <br> {{user.email }}<br>
+                password (hashed): <code>{{ user.password }}</code>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

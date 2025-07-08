@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Home</title>
+</head>
+<body> 
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class ="flash-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+    {% if username %}
+        <h1>Welcome, {{ username }}!</h1>
+        <p><a href="/logout">Logout</a></p>
+        <p><a href="/users">View All Users</a></p>
+    {% else %}
+        <h1>You are not logged in</h1>
+        <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
+    {% endif %}
+</body>
+</html>

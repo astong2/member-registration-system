@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Home</title>
-</head>
-<body> 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class ="flash-message">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
+{% extends "layout.html" %}
+{% block title %}Home | Member App{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Welcome 👋</h1>
+  <p>This is a minimal registration/login app built with Flask and SQLAlchemy.</p>
 
-    {% if username %}
-        <h1>Welcome, {{ username }}!</h1>
-        <p><a href="/logout">Logout</a></p>
-        <p><a href="/users">View All Users</a></p>
-    {% else %}
-        <h1>You are not logged in</h1>
-        <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
-    {% endif %}
-</body>
-</html>
+  {% if not logged_in %}
+  <div class="actions">
+    <a class="btn" href="{{ url_for('register') }}">Create an account</a>
+    <a class="btn btn-outline" href="{{ url_for('login') }}">Log in</a>
+  </div>
+  {% else %}
+  <p>You’re logged in as <strong>{{ session.username }}</strong>.</p>
+  <a class="btn" href="{{ url_for('profile') }}">Go to profile</a>
+  {% endif %}
+</section>
+{% endblock %}
